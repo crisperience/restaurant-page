@@ -1,6 +1,7 @@
 import loadAbout from "./about";
 import loadHome from "./home";
 import loadMenu from "./menu";
+import "./style.css"; // Import the CSS file
 
 function clearContent() {
   const content = document.getElementById("content");

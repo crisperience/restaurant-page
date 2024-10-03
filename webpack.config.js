@@ -2,31 +2,34 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js", // Make sure this points to your entry file
+  mode: "development", // Set the mode to development for better debugging
+  entry: "./src/index.js", // Entry point for the JavaScript file
   output: {
-    filename: "main.js", // This should generate main.js in the dist folder
-    path: path.resolve(__dirname, "dist"), // Specify output directory
+    filename: "main.js", // Output bundle file
+    path: path.resolve(__dirname, "dist"), // Output directory
+    clean: true, // Clean the output directory before every build
   },
   devServer: {
-    static: "./dist", // Serve files from dist
-    open: true, // Open the browser automatically
-    hot: true,
+    static: "./dist", // Serve files from the dist directory
+    open: true, // Automatically open the browser
+    hot: true, // Enable hot module replacement
+    port: 8080, // Specify the port for the server
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/template.html", // Ensure this points to your HTML file
+      template: "./src/template.html", // Template HTML file to use
+      filename: "index.html", // Output HTML file name
     }),
   ],
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"], // CSS processing
+        test: /\.css$/i, // Match all .css files
+        use: ["style-loader", "css-loader"], // Use style-loader and css-loader to process CSS files
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource", // Image handling
+        test: /\.(png|svg|jpg|jpeg|gif)$/i, // Match image file extensions
+        type: "asset/resource", // Handle images as separate files in the output
       },
     ],
   },
